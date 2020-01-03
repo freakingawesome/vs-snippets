@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets    xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>proplist</Title>
+            <Shortcut>proplist</Shortcut>
+            <Description>Code snippet for an lazy-loaded, non-null IList property and backing field</Description>
+            <Author>Chad Gilbert</Author>
+            <SnippetTypes>
+                <SnippetType>Expansion</SnippetType>
+            </SnippetTypes>
+        </Header>
+        <Snippet>
+            <Imports>
+                <Import>
+                    <Namespace>System.Threading</Namespace>
+                </Import>
+            </Imports>
+            <Declarations>
+                <Literal>
+                    <ID>type</ID>
+                    <ToolTip>List item type</ToolTip>
+                    <Default>int</Default>
+                </Literal>
+                <Literal>
+                    <ID>property</ID>
+                    <ToolTip>Property name</ToolTip>
+                    <Default>MyProperty</Default>
+                </Literal>
+                <Literal>
+                    <ID>field</ID>
+                    <ToolTip>The variable backing this property</ToolTip>
+                    <Default>myVar</Default>
+                </Literal>
+            </Declarations>
+            <Code Language="csharp"><![CDATA[private IList<$type$> _$field$;
+
+    public IList<$type$> $property$
+    {
+        get => LazyInitializer.EnsureInitialized(ref _$field$, () => new List<$type$>());
+        set => _$field$ = value;
+    }
+    $end$]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
+
